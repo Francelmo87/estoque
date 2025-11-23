@@ -41,28 +41,26 @@ SGE - Marcas
       {% for brand in brands %}
       <tr>
         <td>
-          <a href="{ url 'brand_detail' brand.id %}" class="text-primary fw-semibold">
+          <a href="{% url 'brand_detail' brand.id %}" class="text-primary fw-semibold">
             {{ brand.id }}
           </a>
         </td>
         <td>{{ brand.name }}</td>
         <td>{{ brand.description }}</td>
         <td>
-          <a href="{ url 'brand_detail' brand.id %}" class="btn btn-info btn-sm">
+          <a href="{% url 'brand_detail' brand.id %}" class="btn btn-info btn-sm">
             <i class="bi bi-eye"></i>
           </a>
 
-          {% if perms.brands.change_brand %}
           <a href="{ url 'brand_update' brand.id %}" class="btn btn-warning btn-sm">
             <i class="bi bi-pencil"></i>
           </a>
-          {% endif %}
-
-          {% if perms.brands.delete_brand %}
+        
+        
           <a href="{ url 'brand_delete' brand.id %}" class="btn btn-danger btn-sm btn-delete">
             <i class="bi bi-trash"></i>
           </a>
-          {% endif %}
+        
         </td>
       </tr>
       {% endfor %}
