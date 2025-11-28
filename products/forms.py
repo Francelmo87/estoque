@@ -1,22 +1,27 @@
-from django.db import models
-from categories.models import Category
-from brands.models import Brand
+from django import forms
+from . import models
 
 
-class Product(models.Model):
-    title = models.CharField(max_length=500)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
-    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name='products')
-    description = models.TextField(null=True, blank=True)
-    serie_number = models.CharField(max_length=200, null=True, blank=True)
-    cost_price = models.DecimalField(max_digits=20, decimal_places=2)
-    selling_price = models.DecimalField(max_digits=20, decimal_places=2)
-    quantity = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class ProductForm(forms.ModelForm):
 
     class Meta:
-        ordering = ['title']
-
-    def __str__(self):
-        return self.title
+        model = models.Product
+        fields = ['title', 'category', 'brand', 'description', 'serie_number', 'cost_price', 'selling_price']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'brand': forms.Select(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'serie_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'cost_price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'selling_price': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'title': 'Título',
+            'category': 'Categoria',
+            'brand': 'Marca',
+            'description': 'Descrição',
+            'serie_number': 'Número de Série',
+            'cost_price': 'Preço de Custo',
+            'selling_price': 'Preço de Venda',
+        }
