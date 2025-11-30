@@ -9,6 +9,7 @@ class InflowListView(ListView):
     model = Inflow
     template_name = 'inflow_list.html'
     context_object_name = 'inflows'
+    paginate_by = 10
    
     def get_queryset(self):
         queryset = super().get_queryset()
