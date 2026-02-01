@@ -1,14 +1,18 @@
+from rest_framework import generics
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from app import metrics
 from brands.models import Brand
 from categories.models import Category
-from . import models, forms
+
+from .models import Product
+from .forms import ProductForm
+from .serializers import ProductSerializer
 
 
 class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    model = models.Product
+    model = Product
     template_name = 'product_list.html'
     context_object_name = 'products'
     paginate_by = 10
@@ -43,29 +47,39 @@ class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
 
 class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    model = models.Product
+    model = Product
     template_name = 'product_create.html'
-    form_class = forms.ProductForm
+    form_class = ProductForm
     success_url = reverse_lazy('product_list')
     permission_required = 'products.add_product'
 
 
 class ProductDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    model = models.Product
+    model = Product
     template_name = 'product_detail.html'
     permission_required = 'products.view_product'
 
 
 class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    model = models.Product
+    model = Product
     template_name = 'product_update.html'
-    form_class = forms.ProductForm
+    form_class = ProductForm
     success_url = reverse_lazy('product_list')
     permission_required = 'products.change_product'
 
 
 class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
-    model = models.Product
+    model = Product
     template_name = 'product_delete.html'
     success_url = reverse_lazy('product_list')
     permission_required = 'products.delete_product'
+    
+
+class ProductCreateListAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
