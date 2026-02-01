@@ -18,4 +18,6 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('inflows/', include('inflows.urls')),
     path('outflows/', include('outflows.urls')),
+    
+    path('api/v1/', include('brands.urls')),
 ]
