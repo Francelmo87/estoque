@@ -6,4 +6,7 @@ urlpatterns = [
     path('list/', views.InflowListView.as_view(), name='inflow_list'),
     path('create/', views.InflowCreateView.as_view(), name='inflow_create'),
     path('<int:pk>/detail/', views.InflowDetailView.as_view(), name='inflow_detail'),
+
+    path('inflows/', views.InflowCreateListAPIView.as_view(), name='inflow-create-list-api-view'),
+    path('inflows/<int:pk>/', views.InflowRetrieveAPIView.as_view(), name='inflow-detail-api-view'),
 ]
