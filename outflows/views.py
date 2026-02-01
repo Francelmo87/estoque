@@ -11,6 +11,7 @@ class OutflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'outflow_list.html'
     context_object_name = 'outflows'
     paginate_by = 10
+    permission_required = 'outflows.view_outflow'
     
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -26,9 +27,11 @@ class OutflowCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     template_name = 'outflow_create.html'
     form_class = OutflowForm
     success_url = reverse_lazy('outflow_list')
-    
+    permission_required = 'outflows.add_outflow'    
 
 
 class OutflowDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Outflow
     template_name = 'outflow_detail.html'
+    permission_required = 'outflows.view_outflow'
+    
