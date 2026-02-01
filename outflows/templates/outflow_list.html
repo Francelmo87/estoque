@@ -7,6 +7,10 @@ SGE - Saídas
 
 {% block content %}
 
+{% if perms.outflows.view_outflow %}
+{% include 'components/_sales_metrics.html' %}
+{% endif %}
+
 <div class="mb-4"></div>
 
 <div class="row mb-3">
@@ -20,13 +24,13 @@ SGE - Saídas
       </div>
     </form>
   </div>
-
+  {% if perms.outflows.add_outflow %}
   <div class="col-md-6">
     <a href="{% url 'outflow_create' %}" class="btn btn-success float-end">
       <i class="bi bi-plus"></i> Nova Saída
     </a>
   </div>
- 
+  {% endif %}
 </div>
 
 <div class="table-responsive">
@@ -37,7 +41,7 @@ SGE - Saídas
         <th>Produto</th>
         <th>Fornecedor</th>
         <th>Quantidade</th>
-        <th>Data de saida</th>
+        <th>Data de entrada</th>
         <th>Ações</th>
       </tr>
     </thead>
