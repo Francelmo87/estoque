@@ -1,60 +1,138 @@
-# Sistema de Gestão de Estoque
+# 📦 Sistema de Gestão de Estoque
 
-O objetivo deste projeto visa ter uma gestão das entradas e saidas do estoque de uma empresa.
+Aplicação **fullstack** desenvolvida com **Django**, utilizando **templates server-side** para a interface web e **Django REST Framework (DRF)** para exposição de endpoints RESTful como camada adicional.
 
-## Motivação
+O projeto foi pensado para simular um cenário real de produção, com regras de negócio bem definidas, organização de código e possibilidade de evolução para integrações futuras (frontend moderno, mobile ou serviços externos).
 
-De acordo com as melhores prática administrativas é de suma importância a gestão de materiais de qualquer ente, seja privado ou público,
-este sistema tem o objetivo de controlar o patrimonio bem como auxiliar na tomada de decisão quanto a que comprar é uma ferramenta de
-auxilio a gestão
+---
 
-## Tecnologias
+## 🚀 Tecnologias Utilizadas
 
-- Linguagem: python 3.17
-- Framework: django 5.2
-- Desenvolvimento: FullStack(django/bootstrap) e API REST(DRF)
+* **Python 3.11+**
+* **Django 5.x**
+* **Django REST Framework (DRF)**
+* **SQLite** (ambiente de desenvolvimento)
+* **HTML5 / CSS3** (Django Templates)
 
- ## Características
+---
 
-Requisitos funcionais
+## 🎯 Objetivo do Projeto
 
-* Cadastro de fornecedores, marcas, categorias, produtos entradas e saidas
-* Filtros por produtos e tipo de categoria e marcas
-* Aumento automaticos de Produtos quando são dadas as entradas
-* Diminuição automaticos de Produtos quando são dadas as saídas
-* Sistema de login para usuários do sistema – administrador, gerente, padrão,
-* Controle de permissões de usuários e/ou grupo, com diferentes níveis de acesso
- * Administrador – Cadastros geral (tudo)
- * Gerente – Responsável pelas as entradas no estoque 
- * Padrão – funcionario responsável pela as saidas do estoque
- * suporte a futuras integrações/ automações
+Criar um sistema de gestão de estoque funcional, focado em:
 
-Requisitos não funcionais
+* Controle de entrada e saída de produtos
+* Organização e manutenção de dados
+* Boas práticas de desenvolvimento com Django
+* Preparação para consumo via API REST
 
-* Segurança
-* Desempenho	
-* Escalabilidade
-* Usabilidade
-* Mantenabilidade
-* Responsividade
+---
 
-Como rodar o projeto?
-- Clone esse repositório.
-- Crie um virtualenv com Python 3.
-- Ative o virtualenv.
-- Instale as dependências.
-- Rode as migrações.
+## 🧩 Funcionalidades
+
+* Cadastro de **Produtos**
+* Cadastro de **Categorias**
+* Cadastro de **Marcas**
+* Cadastro de **Fornecedores**
+* Controle automático de **estoque**
+* Autenticação de usuários
+* Controle de acesso por permissões
+* Interface web utilizando Django Templates
+* Endpoints RESTful para integração futura
+
+---
+
+## 🏗️ Arquitetura
+
+O projeto utiliza uma abordagem híbrida:
+
+* **Django Templates** para renderização server-side
+* **DRF** para disponibilização de endpoints REST
+
+Essa estratégia permite que a aplicação funcione de forma completa no modelo tradicional do Django, mas já esteja preparada para evoluir para uma arquitetura mais desacoplada.
+
+---
+
+## 🔌 API REST (DRF)
+
+A API foi adicionada como um *plus*, permitindo integração com:
+
+* Frontends modernos (React, Vue, etc.)
+* Aplicações mobile
+* Serviços externos
+
+### Exemplos de recursos expostos:
+
+* `/api/v1/produtos/`
+* `/api/v1/categorias/`
+* `/api/v1/marcas/`
+* `/api/v1/fornecedores/`
+
+> A documentação pode ser facilmente estendida com Swagger ou Redoc.
+
+---
+
+## ⚙️ Como Executar o Projeto Localmente
+
+```bash
+# Clone o repositório
+git clone https://github.com/Francelmo87/estoque.git
+
+# Acesse a pasta do projeto
+cd estoque
+
+# Crie e ative o ambiente virtual
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+# Instale as dependências
+pip install -r requirements.txt
+
+# Execute as migrações
+python manage.py migrate
+
+# Crie um superusuário
+python manage.py createsuperuser
+
+# Inicie o servidor
+python manage.py runserver
+```
+
+Acesse no navegador:
 
 ```
-git clone https://github.com/Francelmo87/estoque.git
-cd app
-python3 -m venv .venv
-source .venv/bin/activate 
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
- ```
+http://127.0.0.1:8000/
+```
 
+---
 
+## 🧪 Boas Práticas Aplicadas
 
+* Regras de negócio centralizadas no backend
+* Organização clara de apps, views e serializers
+* Uso de ViewSets e Routers no DRF
+* Código legível e preparado para manutenção
+
+---
+
+## 📌 Próximos Passos (Roadmap)
+
+* Implementar testes automatizados
+* Adicionar documentação interativa da API (Swagger/Redoc)
+* Melhorar controle de permissões
+* Criar relatórios de movimentação de estoque
+
+---
+
+## 👨‍💻 Autor
+
+**Francelmo Sousa da Silva**
+Desenvolvedor Python | Django
+
+* GitHub: [https://github.com/Francelmo87](https://github.com/Francelmo87)
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
