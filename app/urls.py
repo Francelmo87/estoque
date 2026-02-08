@@ -9,7 +9,8 @@ urlpatterns = [
     
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
+    
+    path('api/v1/', include('authentication.urls')),
         
     path('',views.home, name='home'),
     path('brands/', include('brands.urls')),
@@ -18,11 +19,4 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('inflows/', include('inflows.urls')),
     path('outflows/', include('outflows.urls')),
-    
-    path('api/v1/', include('brands.urls')),
-    path('api/v1/', include('categories.urls')),
-    path('api/v1/', include('inflows.urls')),
-    path('api/v1/', include('outflows.urls')),
-    path('api/v1/', include('products.urls')),
-    path('api/v1/', include('suppliers.urls')),
 ]

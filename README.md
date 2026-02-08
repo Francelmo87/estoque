@@ -62,10 +62,10 @@ A API foi adicionada como um *plus*, permitindo integração com:
 
 ### Exemplos de recursos expostos:
 
-* `/api/v1/produtos/`
-* `/api/v1/categorias/`
-* `/api/v1/marcas/`
-* `/api/v1/fornecedores/`
+* `produtos/api/v1/`
+* `categorias/api/v1/`
+* `marcas/api/v1/`
+* `fornecedores/api/v1/`
 
 > A documentação pode ser facilmente estendida com Swagger ou Redoc.
 
