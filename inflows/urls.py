@@ -8,5 +8,5 @@ urlpatterns = [
     path('<int:pk>/detail/', views.InflowDetailView.as_view(), name='inflow_detail'),
 
     path('api/v1/', views.InflowCreateListAPIView.as_view(), name='inflow-create-list-api-view'),
-    path('api/v1/<int:pk>/', views.InflowRetrieveAPIView.as_view(), name='inflow-detail-api-view'),
+    path('<int:pk>/api/v1/', views.InflowRetrieveAPIView.as_view(), name='inflow-detail-api-view'),
 ]

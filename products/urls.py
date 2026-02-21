@@ -10,6 +10,6 @@ urlpatterns = [
     path('<int:pk>/delete/', views.ProductDeleteView.as_view(), name='product_delete'),
 
     path('api/v1/', views.ProductCreateListAPIView.as_view(), name='product-create-list-api-view'),
-    path('api/v1/<int:pk>/', views.ProductRetrieveUpdateDestroyAPIView.as_view(), name='product-detail-api-view'),
+    path('<int:pk>/api/v1/', views.ProductRetrieveUpdateDestroyAPIView.as_view(), name='product-detail-api-view'),
 ]
    

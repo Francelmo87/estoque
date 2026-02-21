@@ -11,5 +11,5 @@ urlpatterns = [
     path('<int:pk>/delete/', views.CategoryDeleteView.as_view(), name='category_delete'),
     
     path('api/v1/', views.CategoryCreateListAPIView.as_view(), name='category-create-list-api-view'),
-    path('api/v1/<int:pk>/', views.CategoryRetrieveUpdateDestroyAPIView.as_view(), name='category-detail-api-view'),
+    path('<int:pk>/api/v1/', views.CategoryRetrieveUpdateDestroyAPIView.as_view(), name='category-detail-api-view'),
 ]
