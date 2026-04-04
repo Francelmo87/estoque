@@ -3,10 +3,10 @@ from . import views
 
 
 urlpatterns = [
-    path('list/', views.InflowListView.as_view(), name='inflow_list'),
-    path('create/', views.InflowCreateView.as_view(), name='inflow_create'),
-    path('<int:pk>/detail/', views.InflowDetailView.as_view(), name='inflow_detail'),
+    path('inflows/list/', views.InflowListView.as_view(), name='inflow_list'),
+    path('inflows/create/', views.InflowCreateView.as_view(), name='inflow_create'),
+    path('inflows/<int:pk>/detail/', views.InflowDetailView.as_view(), name='inflow_detail'),
 
     path('api/v1/', views.InflowCreateListAPIView.as_view(), name='inflow-create-list-api-view'),
-    path('<int:pk>/api/v1/', views.InflowRetrieveAPIView.as_view(), name='inflow-detail-api-view'),
+    path('api/v1/<int:pk>/', views.InflowRetrieveAPIView.as_view(), name='inflow-detail-api-view'),
 ]

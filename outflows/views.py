@@ -13,6 +13,7 @@ class OutflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'outflow_list.html'
     context_object_name = 'outflows'
     paginate_by = 10
+    ordering = ['-created_at']
     permission_required = 'outflows.view_outflow'
     
     def get_queryset(self):
