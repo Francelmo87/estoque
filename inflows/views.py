@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic import ListView, CreateView, DetailView
 from django.urls import reverse_lazy
 
-from .models import Inflow 
+from .models import Inflow
 from .forms import InflowForm
 from .serializers import InflowSerializer
 
@@ -14,7 +14,7 @@ class InflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'inflows'
     paginate_by = 10
     permission_required = 'inflows.view_inflow'
-   
+
     def get_queryset(self):
         queryset = super().get_queryset()
         product = self.request.GET.get('product')

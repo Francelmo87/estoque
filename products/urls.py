@@ -12,4 +12,3 @@ urlpatterns = [
     path('api/v1/', views.ProductCreateListAPIView.as_view(), name='product-create-list-api-view'),
     path('api/v1/<int:pk>/', views.ProductRetrieveUpdateDestroyAPIView.as_view(), name='product-detail-api-view'),
 ]
-   

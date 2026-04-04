@@ -8,6 +8,7 @@ from .models import Outflow
 from .forms import OutflowForm
 from .serializers import OutflowSerializer
 
+
 class OutflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Outflow
     template_name = 'outflow_list.html'
@@ -15,7 +16,7 @@ class OutflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     paginate_by = 10
     ordering = ['-created_at']
     permission_required = 'outflows.view_outflow'
-    
+
     def get_queryset(self):
         queryset = super().get_queryset()
         product = self.request.GET.get('product')
@@ -30,12 +31,13 @@ class OutflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         context['sales_metrics'] = metrics.get_sales_metrics()
         return context
 
+
 class OutflowCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Outflow
     template_name = 'outflow_create.html'
     form_class = OutflowForm
     success_url = reverse_lazy('outflow_list')
-    permission_required = 'outflows.add_outflow'    
+    permission_required = 'outflows.add_outflow'
 
 
 class OutflowDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):

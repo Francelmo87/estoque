@@ -14,7 +14,7 @@ class SupplierListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'suppliers'
     paginate_by = 10
     permission_required = 'suppliers.view_supplier'
-    
+
     def get_queryset(self):
         queryset = super().get_queryset()
         name = self.request.GET.get('name')
@@ -29,13 +29,13 @@ class SupplierCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
     form_class = SupplierForm
     success_url = reverse_lazy('supplier_list')
     permission_required = 'suppliers.add_supplier'
-  
+
 
 class SupplierDetailView(DetailView):
     model = Supplier
     template_name = 'supplier_detail.html'
     permission_required = 'suppliers.view_supplier'
-   
+
 
 class SupplierUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Supplier
@@ -43,7 +43,7 @@ class SupplierUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView
     form_class = SupplierForm
     success_url = reverse_lazy('supplier_list')
     permission_required = 'suppliers.change_supplier'
-    
+
 
 class SupplierDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Supplier

@@ -29,13 +29,13 @@ class CategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
     form_class = CategoryForm
     success_url = reverse_lazy('category_list')
     permission_required = 'categories.add_category'
-    
+
 
 class CategoryDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Category
     template_name = 'category_detail.html'
     permission_required = 'categories.view_category'
-    
+
 
 class CategoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Category
