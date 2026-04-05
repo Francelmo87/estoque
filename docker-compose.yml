@@ -1,0 +1,22 @@
+services:
+    estoque_web:
+        build: .
+        restart: always
+        ports:
+            - 8000:8000
+        depends_on:
+            - estoque_db
+
+    estoque_db:
+        image: postgres:18
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres_data:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=estoque
+
+volumes:
+    postgres_data:
