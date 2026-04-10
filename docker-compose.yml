@@ -1,22 +1,40 @@
-services:
-    estoque_web:
-        build: .
-        restart: always
-        ports:
-            - 8000:8000
-        depends_on:
-            - estoque_db
+version: '3.9'
 
-    estoque_db:
-        image: postgres:18
-        ports:
-            - 5432:5432
-        volumes:
-            - postgres_data:/var/lib/postgresql/
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=estoque
+services:
+  estoque_db:
+    image: postgres:15
+    container_name: estoque_db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
+      interval: 5s
+      retries: 5
+      timeout: 5s
+
+  estoque_web:
+    build: .
+    container_name: estoque_web
+    restart: always
+    command: >
+      sh -c "
+      echo 'Aguardando banco...' &&
+      sleep 5 &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      estoque_db:
+        condition: service_healthy
+    env_file:
+      - .env
 
 volumes:
-    postgres_data:
+  postgres_data:
