@@ -5,53 +5,68 @@ Aplicação **fullstack** desenvolvida com **Django**, utilizando **templates se
 O projeto foi pensado para simular um cenário real de produção, com regras de negócio bem definidas, organização de código e possibilidade de evolução para integrações futuras (frontend moderno, mobile ou serviços externos).
 
 ---
+## 🧠 Visão Geral
 
-## 🚀 Tecnologias Utilizadas
+Este projeto foi desenvolvido para simular um cenário real de controle de estoque, indo além de um simples CRUD.
+
+A aplicação evoluiu ao longo do desenvolvimento, incorporando melhorias arquiteturais e tecnológicas, com foco em:
+
+* Consistência de dados
+* Organização de código
+* Escalabilidade
+* Preparação para produção
+
+---
+## 🐳 Arquitetura com Docker
+
+A aplicação está totalmente containerizada, com separação clara de serviços:
+
+* **estoque_web** → aplicação Django
+* **estoque_db** → PostgreSQL 15
+```
+[ Cliente ]
+     ↓
+[ Django App (estoque_web) ]
+     ↓
+[ PostgreSQL (estoque_db) ]
+```
+✔️ Benefícios
+* Ambiente padronizado
+* Isolamento de serviços
+* Facilidade de deploy
+* Persistência de dados com volumes
+---
+
+## 🚀 Tecnologias 
 
 * **Python 3.11+**
 * **Django 5.x**
 * **Django REST Framework (DRF)**
-* **SQLite** (ambiente de desenvolvimento)
+* **PostgreSQL 15** 
+* **Docker & Docker Composes**
 * **HTML5 / CSS3** (Django Templates)
 
 ---
-
-## 🎯 Objetivo do Projeto
-
-Criar um sistema de gestão de estoque funcional, focado em:
-
-* Controle de entrada e saída de produtos
-* Organização e manutenção de dados
-* Boas práticas de desenvolvimento com Django
-* Preparação para consumo via API REST
-
----
-
 ## 🧩 Funcionalidades
 
-* Cadastro de **Produtos**
-* Cadastro de **Categorias**
-* Cadastro de **Marcas**
-* Cadastro de **Fornecedores**
-* Controle automático de **estoque**
+**📊 Cadastros**
+* Produtos
+* Categorias
+* Marcas
+* Fornecedores
+**📦 Controle de Estoque**
+* Entrada de produtos
+* Saída controlada
+* Atualização automática do estoque
+* Garantia de integridade dos dados
+**🔐 Segurança**
 * Autenticação de usuários
-* Controle de acesso por permissões
-* Interface web utilizando Django Templates
-* Endpoints RESTful para integração futura
+* Controle de permissões
+**🌐 API REST**
+* Endpoints estruturados com DRF
+* Preparado para integrações externas
 
 ---
-
-## 🏗️ Arquitetura
-
-O projeto utiliza uma abordagem híbrida:
-
-* **Django Templates** para renderização server-side
-* **DRF** para disponibilização de endpoints REST
-
-Essa estratégia permite que a aplicação funcione de forma completa no modelo tradicional do Django, mas já esteja preparada para evoluir para uma arquitetura mais desacoplada.
-
----
-
 ## 🔌 API REST (DRF)
 
 A API foi adicionada como um *plus*, permitindo integração com:
@@ -60,79 +75,152 @@ A API foi adicionada como um *plus*, permitindo integração com:
 * Aplicações mobile
 * Serviços externos
 
-### Exemplos de recursos expostos:
-
-* `produtos/api/v1/`
-* `categorias/api/v1/`
-* `marcas/api/v1/`
-* `fornecedores/api/v1/`
-
-> A documentação pode ser facilmente estendida com Swagger ou Redoc.
+**Exemplos de recursos expostos:**
+```
+/api/v1/produtos/
+/api/v1/categorias/
+/api/v1/marcas
+/api/v1/fornecedores
+```
 
 ---
-
-## ⚙️ Como Executar o Projeto Localmente
-
-```bash
+## ⚙️ Execução com Docker
+``` Bash
 # Clone o repositório
 git clone https://github.com/Francelmo87/estoque.git
 
 # Acesse a pasta do projeto
 cd estoque
 
-# Crie e ative o ambiente virtual
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
-
-# Instale as dependências
-pip install -r requirements.txt
-
-# Execute as migrações
-python manage.py migrate
-
-# Crie um superusuário
-python manage.py createsuperuser
-
-# Inicie o servidor
-python manage.py runserver
+# suba os Contaners
+docker compose u --build
 ```
 
 Acesse no navegador:
 
-```
-http://127.0.0.1:8000/
-```
+👉 http://localhost:8000/
 
 ---
-
 ## 🧪 Boas Práticas Aplicadas
 
+* Separação de responsabilidades
 * Regras de negócio centralizadas no backend
-* Organização clara de apps, views e serializers
-* Uso de ViewSets e Routers no DRF
-* Código legível e preparado para manutenção
+* Uso consistente do ORM do Django
+* Estrutura modular por apps
+* Uso de ViewSets e Serializers (DRF)
+*Containerização da aplicação
+* Uso de variáveis de ambiente
 
 ---
+## 🔐 Segurança e Configuração
 
-## 📌 Próximos Passos (Roadmap)
+A aplicação utiliza variáveis de ambiente para proteger dados sensíveis:
 
-* Implementar testes automatizados
-* Adicionar documentação interativa da API (Swagger/Redoc)
-* Melhorar controle de permissões
-* Criar relatórios de movimentação de estoque
+* Credenciais do banco de dados
+* Configurações críticas do sistema
+
+Boas práticas adotadas:
+* Uso de arquivo .env
+* Evitar hardcode de informações sensíveis
+* Preparação para múltiplos ambientes
 
 ---
+## 🧠 Decisões Técnicas
+🔹 Evolução da Arquitetura
 
+O projeto foi desenvolvido de forma incremental:
+
+**1. Monolito com Django Templates**
+* Renderização server-side
+* Foco nas regras de negócio
+**2. Introdução do DRF**
+* Criação de API REST
+* Preparação para frontend desacoplado
+* Possibilidade de integração com mobile e serviços externos
+**3. Containerização com Docker**
+* Padronização do ambiente
+* Isolamento de serviços
+* Uso de PostgreSQL em container
+
+---
+**🔹 Modelagem do Banco de Dados**
+* Modelagem planejada previamente utilizando Whimsical
+* Estrutura pensada para:
+** Normalização
+** Consistência
+** Escalabilidade
+
+---
+**🔹 Escolha do PostgreSQL**
+* Substituição do SQLite por PostgreSQL
+* Melhor suporte a:
+** Concorrência
+** Integridade de dados
+** Ambientes de produção
+
+---
+**🔹 Uso do Docker**
+* Containers separados para aplicação e banco
+* Uso de volumes para persistência
+* Uso de healthcheck para garantir disponibilidade do banco
+* Comunicação via rede interna Docker
+
+---
+**🔹 Decisão: Uso do runserver**
+O uso do runserver foi mantido intencionalmente neste estágio:
+
+* Simplicidade no ambiente de desenvolvimento
+* Facilidade de testes
+* Foco na lógica de negócio
+
+📌 A substituição por um servidor WSGI está prevista como evolução natural.
+
+---
+## 🏗️ Estratégia de Deploy e Escalabilidade
+
+A arquitetura foi planejada para evoluir para produção com:
+* Gunicorn como servidor WSGI
+* Nginx como reverse proxy
+* Melhor controle de performance e concorrência
+```
+[ Cliente ]
+     ↓
+[ Nginx ]
+     ↓
+[ Gunicorn + Django ]
+     ↓
+[ PostgreSQL ]
+```
+
+---
+## 🎯 Destaques Técnicos
+
+Este projeto demonstra:
+* Evolução arquitetural consciente
+* Uso real de Docker em aplicações Django
+* Integração com PostgreSQL
+* Preocupação com segurança
+* Organização e escalabilidade
+* Conhecimento prático de DRF
+
+---
+## 💡 Considerações Finais
+
+Este projeto representa uma base sólida para evolução em:
+
+* Sistemas de almoxarifado
+* ERPs simplificados
+* APIs corporativas
+* Integrações com BI e dashboards
+
+---
 ## 👨‍💻 Autor
-
 **Francelmo Sousa da Silva**
 Desenvolvedor Python | Django
 
 * GitHub: [https://github.com/Francelmo87](https://github.com/Francelmo87)
 
 ---
-
 ## 📄 Licença
 
 Este projeto está sob a licença MIT.
